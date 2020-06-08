@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BeautyService.Models.ServiceType>
+@{
+    ViewData["Title"] = "Услуги";
+}
+
+<h3>Выберите услугу для записи</h3> 
+
+<table class="table">
+    <thead>
+        <tr scope="row">
+            <th scope="col">Услуга</th>
+            <th scope="col">Цена, руб.</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    @foreach (var t in Model)
+    {
+        <tr scope="row">
+            <td>@t.Title</td>
+            <td>@t.Price</td>
+            <td><a class="btn-success" href="~/Registrations/?serviceTypeId=@t.Id&serviceCategoryId=@t.ServiceCategoryId">Записаться</a></td>
+        </tr>
+    }
+</table>

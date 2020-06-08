@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BeautyService.Models.ServiceCategory>
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<h4>Добро пожаловать!</h4>
+<br />
+<h3>Какой мастер вам нужен?</h3>
+<br />
+<div class="d-lg-inline-flex">    
+    @foreach (var p in Model)
+    {
+        <div class="col-md-4">
+
+            <p>
+                <a href="~/ServiceTypes/Index/?serviceCategoryId=@p.Id">
+                    <img class="card-img img-rounded m-x-auto d-block" src="@p.Picture" height="200" /></a>                
+                <a href="~/ServiceTypes/Index/?serviceCategoryId=@p.Id" class="btn-outline-primary" style="align-self:center">@p.Title</a>
+            </p>
+        </div>
+        <div class="col">
+
+        </div>
+    }    
+</div>

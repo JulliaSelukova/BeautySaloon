@@ -1,0 +1,57 @@
+﻿@model BeautyService.Models.Registration
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Новая запись</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Дата</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            @*</div>
+            <div class="form-group">*@
+                <label asp-for="Time" class="control-label">Время </label>
+                <input asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientName" class="control-label">Имя клиента</label>
+                <input asp-for="ClientName" class="form-control" />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            @*</div>
+            <div class="form-group">*@
+                <label asp-for="ClientPhone" class="control-label">Контактный телефон</label>
+                <input asp-for="ClientPhone" class="form-control" />
+                <span asp-validation-for="ClientPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsEngaged" class="control-label">Занята</label>
+                <input asp-for="IsEngaged" class="form-control" />
+                <span asp-validation-for="IsEngaged" class="text-danger"></span>
+            </div>
+            <div class="hide">
+                <label asp-for="ServiceTypeId" class="control-label"></label>
+                <select asp-for="ServiceTypeId" class="form-control" asp-items="ViewBag.ServiceTypeId"></select>
+            </div>
+            <div class="hide" hidden="hidden">>
+                <label asp-for="ServiceCategoryId" class="control-label"></label>
+                <select asp-for="ServiceCategoryId" class="form-control" asp-items="ViewBag.ServiceCategoryId"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Создать запись" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

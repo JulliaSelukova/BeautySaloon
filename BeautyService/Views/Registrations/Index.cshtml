@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BeautyService.Models.Registration>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@ViewBag.ServiceType.Title</h1>
+<br/>
+
+<form asp-action="DateSearch" method="get">
+    <p>
+        Выберите дату: <input type="date" name="dateSearch">
+        <input class="btn btn-primary" type="submit" value="Обновить" />
+    </p>
+    <input type="text" value="@ViewBag.ServiceType.Id" name="serviceTypeId" hidden="hidden" />
+    <input type="text" value="@ViewBag.ServiceType.ServiceCategoryId" name="serviceCategoryId" hidden="hidden" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Время</th>
+            <th scope="col">Запись</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    <a class="btn-success" href="~/Registrations/Edit/?id=@item.Id&serviceTypeId=@ViewBag.ServiceType.Id">Записаться</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

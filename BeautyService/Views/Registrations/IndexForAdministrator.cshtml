@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BeautyService.Models.Registration>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@ViewBag.ServiceCategory.Title</h1>
+<br />
+<form asp-action="Create" method="get">
+    <input class="btn btn-primary" type="submit" value="Создать новую запись" />
+    <input type="text" value="@ViewBag.ServiceCategory.Id" name="ServiceCategoryId" hidden="hidden" />
+</form>
+<br />
+<br />
+<form asp-action="DateSearchForAdmin" method="get">
+    <p>
+        Выберите дату: <input type="date" name="dateSearch">
+        <input class="btn btn-primary" type="submit" value="Обновить" />
+    </p>
+    <input type="text" value="@ViewBag.ServiceCategory.Id" name="ServiceCategoryId" hidden="hidden" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Услуга</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Время</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Контактный телефон</th>
+            <th scope="col">Занята</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ServiceType?.Title
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsEngaged)
+                </td>
+                <td>
+                    <a asp-action="EditForAdministrator" asp-route-id="@item.Id">Редактировать</a>    |                        
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
