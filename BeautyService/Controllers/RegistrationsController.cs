@@ -53,7 +53,13 @@ namespace BeautyService.Controllers
 
         [HttpGet]
         public async Task<IActionResult> DateSearch(DateTime dateSearch, int? serviceTypeId, int? serviceCategoryId)
-        {            
+        {    
+            if(dateSearch.Date < DateTime.Now.Date)
+            {
+                var registrations = new List<Registration>();
+                ViewBag.ServiceType = _context.ServiceTypes.Where(t => t.Id == serviceTypeId).FirstOrDefault();
+                return View("Index", registrations);
+            }
             var registrations = _context.Registrations.Where(x => x.ServiceCategoryId == serviceCategoryId
                                         && x.Date.Date == dateSearch.Date && !x.IsEngaged).ToList();
             ViewBag.ServiceType = _context.ServiceTypes.Where(t => t.Id == serviceTypeId).FirstOrDefault();            
